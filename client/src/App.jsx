@@ -53,10 +53,12 @@ const initialTasks = [
 
 function App() {
   const [activePage, setActivePage] = useState("Dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState( () => window.innerWidth >= 768);
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [tasks, setTasks] = useState(initialTasks);
   const [newTask, setNewTask] = useState("");
+  const [theme, setTheme] = useState("light");
 
   const filteredResources = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -103,9 +105,20 @@ function App() {
   const completedTasks = tasks.filter((task) => task.done).length;
 
   return (
-    <div className="app-shell">
-      
-<aside className="fixed inset-y-0 left-0 z-50 hidden w-[220px] flex-col bg-[#18253f] px-[15px] pt-[30px] pb-5 text-white md:flex min-[1101px]:w-[250px] min-[1101px]:px-5">
+    <div className="app-shell" data-theme={theme}>
+<aside
+  className={`fixed inset-y-0 left-0 z-50 flex w-[220px] flex-col bg-[#18253f] px-[15px] pt-[30px] pb-5 text-white transition-transform duration-300 ease-in-out min-[1101px]:w-[250px] min-[1101px]:px-5 ${
+    sidebarOpen ? "translate-x-0" : "-translate-x-full"
+  } md:translate-x-0`}
+>
+  <button
+  type="button"
+  onClick={() => setSidebarOpen(false)}
+  aria-label="Close sidebar"
+  className="mb-5 self-end rounded-lg px-3 py-2 text-xl text-white hover:bg-[#263450] md:hidden"
+>
+  ×
+</button>
   <a
     className="mb-12 ml-[5px] flex items-center gap-3 text-white no-underline"
     href="#dashboard"
@@ -142,7 +155,13 @@ function App() {
             ? "bg-[#6555d9] font-semibold text-white"
             : "bg-transparent text-[#bdc7da] hover:bg-[#263450] hover:text-white"
         }`}
-        onClick={() => setActivePage(page)}
+        onClick={() => {
+          setActivePage(page);
+
+          if (window.innerWidth < 768) {
+              setSidebarOpen(false);
+                 }
+}}
       >
         <span className="w-5 text-center text-[19px]">
           {icon}
@@ -181,10 +200,25 @@ function App() {
     </div>
   </div>
 </aside>
-
+ {sidebarOpen && (
+  <button
+    type="button"
+    aria-label="Close sidebar overlay"
+    onClick={() => setSidebarOpen(false)}
+    className="fixed inset-0 z-40 cursor-default bg-black/40 md:hidden"
+  />
+)}
 
       <main className="main-content">
         <header className="topbar">
+          <button
+            type="button"
+            onClick={() => setSidebarOpen((open) => !open)}
+            aria-label="Toggle sidebar"
+             className="rounded-lg border border-[#e9ebf2] bg-white px-3 py-2 text-xl text-[#18253f] hover:bg-gray-100 md:hidden"
+            >
+             ☰
+            </button>
           <div className="mobile-brand">
             <span className="brand-mark">H</span>
             <strong>HilcoeLearn</strong>
@@ -198,8 +232,18 @@ function App() {
             <span className="status-dot" />
             Your learning space
           </div>
+          <button
+             type="button"
+             className="theme-toggle"
+            onClick={() =>
+              setTheme((currentTheme) =>
+             currentTheme === "light" ? "dark" : "light"
+          )
+        }
+      >
+            {theme === "light" ? "☾ Dark mode" : "☀ Light mode"}
+      </button>
         </header>
-
         <div className="page-content">
           {activePage === "Dashboard" && (
             <>
@@ -219,6 +263,13 @@ function App() {
                   <span>✳</span>
                 </div>
               </section>
+              <section className="about-section">
+                <p>
+              HilcoeLearn is a student-focused platform that makes learning more connected and collaborative. Students can
+              share materials with one another and easily find resources by searching for a course, teacher, or student uploader.
+              It also helps students organize their academic tasks and keep track of their study progress.
+              </p>
+               </section>
 
               <section className="stats-grid">
                 <article className="stat-card">

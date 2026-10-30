@@ -102,3 +102,32 @@ button {
 #root {
   min-height: 100vh;
 }
+/* LIGHT THEME: WHITE AND DARK GOLD */
+.app-shell[data-theme="light"] {
+  --color-primary: #987323;
+  --color-primary-hover: #765817;
+  --color-primary-light: #f5eedf;
+  --color-sidebar: #ffffff;
+  --color-sidebar-hover: #f3eee3;
+  --color-background: #faf9f6;
+  --color-surface: #ffffff;
+  --color-text: #29251d;
+  --color-text-secondary: #746c5e;
+  --color-text-muted: #999080;
+  --color-border: #e9e3d7;
+}
+
+/* DARK THEME: BLACK AND GOLD */
+.app-shell[data-theme="dark"] {
+  --color-primary: #d4af37;
+  --color-primary-hover: #e6c65b;
+  --color-primary-light: #382f19;
+  --color-sidebar: #111111;
+  --color-sidebar-hover: #29251b;
+  --color-background: #151515;
+  --color-surface: #202020;
+  --color-text: #f5f2e9;
+  --color-text-secondary: #c0b9a8;
+  --color-text-muted: #999080;
+  --color-border: #39352b;
+}

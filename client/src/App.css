@@ -701,6 +701,36 @@ a:focus-visible {
   color: #5f6880;
   font-weight: 700;
 }
+.about-section {
+  margin: 24px 0;
+  padding: 20px 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.about-section p {
+  margin: 0;
+}
+
+.theme-toggle {
+  padding: 9px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--color-primary-light);
+}
 
 @media (max-width: 1100px) {
   .sidebar {
