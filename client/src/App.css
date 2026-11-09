@@ -26,6 +26,9 @@ a:focus-visible {
 
 .app-shell {
   min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-text);
+
 }
 
 .sidebar {
@@ -56,7 +59,7 @@ a:focus-visible {
   height: 42px;
   flex-shrink: 0;
   border-radius: 13px;
-  background: #7765f0;
+  background: var(--color-primary);
   color: white;
   font-family: "Manrope", sans-serif;
   font-size: 23px;
@@ -258,12 +261,13 @@ a:focus-visible {
   overflow: hidden;
   padding: 35px 38px;
   border-radius: 18px;
-  color: white;
-  background: linear-gradient(115deg, #6554d9, #8876ef);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
 }
 
 .welcome-section .eyebrow {
-  color: #ded9ff;
+  color: var(--color-primary);
 }
 
 .welcome-section h1,
@@ -285,7 +289,7 @@ a:focus-visible {
 
 .welcome-section .welcome-text {
   max-width: 440px;
-  color: #eeebff;
+  color: var(--color-text-secondary);
 }
 
 .welcome-decoration {
@@ -295,26 +299,26 @@ a:focus-visible {
   width: 150px;
   height: 130px;
   flex-shrink: 0;
-  border: 1px solid #ffffff30;
+  border: 1px solid var(--color-border);
   border-radius: 45% 55% 55% 45%;
-  background: #ffffff12;
+  background: var(--color-primary-light);
   transform: rotate(-12deg);
 }
 
 .welcome-decoration span {
   position: absolute;
-  color: #f4d991;
+  color: var(--color-primary);
   font-size: 44px;
 }
 
 .welcome-decoration span:nth-child(2) {
-  color: #fff;
+  color: var(--color-text);
   font-size: 27px;
   transform: translate(32px, 20px);
 }
 
 .welcome-decoration span:nth-child(3) {
-  color: #d6d0ff;
+ color: var(--color-primary-hover);
   font-size: 24px;
   transform: translate(-38px, 25px);
 }
@@ -343,18 +347,17 @@ a:focus-visible {
 }
 
 .purple-bg {
-  color: #6d5ce8;
-  background: #efedff;
+ color: var(--color-primary);
+  background: var(--color-primary-light);
 }
-
 .green-bg {
-  color: #169c70;
-  background: #e4f8ef;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .orange-bg {
-  color: #d88932;
-  background: #fff0df;
+ color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .stat-card p {
@@ -731,6 +734,10 @@ a:focus-visible {
 .theme-toggle:hover {
   background: var(--color-primary-light);
 }
+.brand-mark {
+  background: var(--color-primary) !important;
+}
+
 
 @media (max-width: 1100px) {
   .sidebar {

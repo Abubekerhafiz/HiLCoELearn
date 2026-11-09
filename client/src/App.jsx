@@ -107,24 +107,27 @@ function App() {
   return (
     <div className="app-shell" data-theme={theme}>
 <aside
-  className={`fixed inset-y-0 left-0 z-50 flex w-[220px] flex-col bg-[#18253f] px-[15px] pt-[30px] pb-5 text-white transition-transform duration-300 ease-in-out min-[1101px]:w-[250px] min-[1101px]:px-5 ${
-    sidebarOpen ? "translate-x-0" : "-translate-x-full"
-  } md:translate-x-0`}
+  className={`fixed inset-y-0 left-0 z-50 flex w-[220px] flex-col
+    bg-[var(--color-sidebar)] px-[15px] pt-[30px] pb-5
+    text-[var(--color-text)] transition-transform duration-300
+    md:flex min-[1101px]:w-[250px] min-[1101px]:px-5
+    ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+    md:translate-x-0`}
 >
   <button
   type="button"
   onClick={() => setSidebarOpen(false)}
   aria-label="Close sidebar"
-  className="mb-5 self-end rounded-lg px-3 py-2 text-xl text-white hover:bg-[#263450] md:hidden"
+  className="mb-5 self-end rounded-lg px-3 py-2 text-xl text-[var(--color-text)] hover:bg-[var(--color-sidebar-hover)] md:hidden"
 >
   ×
 </button>
   <a
-    className="mb-12 ml-[5px] flex items-center gap-3 text-white no-underline"
+    className="mb-12 ml-[5px] flex items-center gap-3 text--[var(--color-text)]  no-underline"
     href="#dashboard"
     onClick={() => setActivePage("Dashboard")}
   >
-    <span className="grid size-[42px] shrink-0 place-items-center rounded-[13px] bg-[#7765f0] font-['Manrope',sans-serif] text-[23px] font-extrabold text-white">
+    <span className="grid size-[42px] shrink-0 place-items-center rounded-[13px] bg-[var(--color-primary)] font-['Manrope',sans-serif] text-[23px] font-extrabold text-white">
       H
     </span>
 
@@ -132,7 +135,7 @@ function App() {
       <h1 className="font-['Manrope',sans-serif] text-base font-extrabold tracking-[-0.4px]">
         HilcoeLearn
       </h1>
-      <small className="mt-[3px] block text-xs text-[#aab4cb]">
+      <small className="mt-[3px] block text-xs text--[var(--color-text-secondary)]">
         Learn together.
       </small>
     </span>
@@ -152,8 +155,8 @@ function App() {
         key={page}
         className={`flex w-full items-center gap-[13px] rounded-[10px] border-0 px-[14px] py-[13px] text-left text-[13px] transition-colors ${
           activePage === page
-            ? "bg-[#6555d9] font-semibold text-white"
-            : "bg-transparent text-[#bdc7da] hover:bg-[#263450] hover:text-white"
+            ? "bg-[var(--color-primary)] font-semibold text-white"
+            :"bg-transparent text-[var(--color-text-secondary)] hover:bg-[var(--color-sidebar-hover)] hover:text-[var(--color-text)]"
         }`}
         onClick={() => {
           setActivePage(page);
@@ -172,32 +175,27 @@ function App() {
   </nav>
 
   <div className="mt-auto">
-    <div className="rounded-[13px] border border-[#34425c] bg-[#202e49] p-[17px]">
-      <span className="mb-3 grid size-[30px] place-items-center rounded-[9px] bg-[#3d3b70] text-[#d0c9ff]">
+    <div className="rounded-[13px] border border-[var(--color-border)] bg-[var(--color-sidebar-card)] p-[17px]">
+      <span className="mb-3 grid size-[30px] place-items-center rounded-[9px] bg-[var(--color-primary-light)] text-[var(--color-primary)]">
         ✦
       </span>
 
-      <strong className="block text-xs leading-[1.6]">
-        Learning is better together.
-      </strong>
-
-      <p className="mt-[6px] text-[11px] leading-[1.7] text-[#aab5ca]">
+      <p className="mt-[6px] text-[11px] leading-[1.7] text-[var(--color-text)]">
         Share what you know. Discover what you need.
       </p>
     </div>
 
-    <div className="mt-[22px] flex items-center gap-[11px] border-t border-[#34425c] px-[2px] pt-4">
-      <div className="grid size-[37px] shrink-0 place-items-center rounded-full bg-[#e8e4ff] font-bold text-[#5543c7]">
-        S
-      </div>
-
-      <div>
-        <strong className="block text-xs">Student</strong>
-        <small className="mt-1 block text-[10px] text-[#aab5ca]">
-          HilcoeLearn member
-        </small>
-      </div>
-    </div>
+   <div className="mt-[22px] flex items-center gap-[11px] border-t border-[var(--color-border)] px-[2px] pt-4">
+  <div className="grid size-[37px] shrink-0 place-items-center rounded-full bg-[var(--color-primary-light)] font-bold text-[var(--color-primary)]">
+    S
+  </div>
+  <div>
+    <strong className="block text-xs">Student</strong>
+    <small className="mt-1 block text-[10px] text-[var(--color-text-secondary)]">
+      HilcoeLearn member
+    </small>
+   </div>
+   </div>
   </div>
 </aside>
  {sidebarOpen && (
@@ -215,12 +213,12 @@ function App() {
             type="button"
             onClick={() => setSidebarOpen((open) => !open)}
             aria-label="Toggle sidebar"
-             className="rounded-lg border border-[#e9ebf2] bg-white px-3 py-2 text-xl text-[#18253f] hover:bg-gray-100 md:hidden"
+             className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-xl text-[var(--color-text)] hover:bg-[var(--color-sidebar-hover)] md:hidden"
             >
              ☰
             </button>
           <div className="mobile-brand">
-            <span className="brand-mark">H</span>
+            <span className="brand-mark bg-[var(--color-primary)]">H</span>
             <strong>HilcoeLearn</strong>
           </div>
 
@@ -241,7 +239,7 @@ function App() {
           )
         }
       >
-            {theme === "light" ? "☾ Dark mode" : "☀ Light mode"}
+            {theme === "light" ? " Dark mode" : " Light mode"}
       </button>
         </header>
         <div className="page-content">

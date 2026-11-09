@@ -115,6 +115,7 @@ button {
   --color-text-secondary: #746c5e;
   --color-text-muted: #999080;
   --color-border: #e9e3d7;
+  --color-sidebar-card: #f5f0e5;
 }
 
 /* DARK THEME: BLACK AND GOLD */
@@ -130,4 +131,5 @@ button {
   --color-text-secondary: #c0b9a8;
   --color-text-muted: #999080;
   --color-border: #39352b;
+  --color-sidebar-card: #29251b;
 }
