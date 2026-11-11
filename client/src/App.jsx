@@ -1,5 +1,11 @@
 
 import { useMemo, useState } from "react";
+import {
+  Home01Icon,
+  BookOpen01Icon,
+  Task01Icon,
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import "./App.css";
 
 const resources = [
@@ -123,20 +129,20 @@ function App() {
   ×
 </button>
   <a
-    className="mb-12 ml-[5px] flex items-center gap-3 text--[var(--color-text)]  no-underline"
+    className="mb-12 ml-[5px] flex items-center gap-3 text-[var(--color-text)]  no-underline"
     href="#dashboard"
     onClick={() => setActivePage("Dashboard")}
   >
-    <span className="grid size-[42px] shrink-0 place-items-center rounded-[13px] bg-[var(--color-primary)] font-['Manrope',sans-serif] text-[23px] font-extrabold text-white">
-      H
-    </span>
+   <span className="grid size-[42px] shrink-0 place-items-center rounded-[13px] bg-[var(--color-primary)] text-[23px] font-extrabold text-white">
+    H
+  </span>
 
     <span>
       <h1 className="font-['Manrope',sans-serif] text-base font-extrabold tracking-[-0.4px]">
         HilcoeLearn
       </h1>
-      <small className="mt-[3px] block text-xs text--[var(--color-text-secondary)]">
-        Learn together.
+      <small className="mt-[3px] block text-xs text-[var(--color-text-secondary)]">
+        Learn together
       </small>
     </span>
   </a>
@@ -147,15 +153,15 @@ function App() {
 
   <nav className="grid gap-2">
     {[
-      ["Dashboard", "⌂"],
-      ["Study Materials", "▤"],
-      ["My Tasks", "✓"],
+      ["Dashboard", Home01Icon],
+      ["Study Materials", BookOpen01Icon],
+      ["My Tasks", Task01Icon],
     ].map(([page, icon]) => (
       <button
         key={page}
         className={`flex w-full items-center gap-[13px] rounded-[10px] border-0 px-[14px] py-[13px] text-left text-[13px] transition-colors ${
           activePage === page
-            ? "bg-[var(--color-primary)] font-semibold text-white"
+            ? "bg-[var(--color-primary)] font-semibold text-[var(--color-background)]"
             :"bg-transparent text-[var(--color-text-secondary)] hover:bg-[var(--color-sidebar-hover)] hover:text-[var(--color-text)]"
         }`}
         onClick={() => {
@@ -166,8 +172,8 @@ function App() {
                  }
 }}
       >
-        <span className="w-5 text-center text-[19px]">
-          {icon}
+        <span className="grid w-5 shrink-0 place-items-center">
+        <HugeiconsIcon icon={icon} size={20} strokeWidth={1.8} />
         </span>
         {page}
       </button>

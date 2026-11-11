@@ -20,7 +20,7 @@ button {
 button:focus-visible,
 input:focus-visible,
 a:focus-visible {
-  outline: 3px solid #a69bf7;
+  outline: 3px solid var(--color-primary);
   outline-offset: 3px;
 }
 
@@ -39,7 +39,7 @@ a:focus-visible {
   flex-direction: column;
   width: var(--sidebar-width);
   padding: 30px 20px 20px;
-  color: white;
+  color: var(--color-text);
   background: var(--color-sidebar);
 }
 
@@ -48,7 +48,7 @@ a:focus-visible {
   align-items: center;
   gap: 12px;
   margin: 0 0 48px 5px;
-  color: white;
+  color: var(--color-text);
   text-decoration: none;
 }
 
@@ -61,7 +61,7 @@ a:focus-visible {
   border-radius: 13px;
   background: var(--color-primary);
   color: white;
-  font-family: "Manrope", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 23px;
   font-weight: 800;
 }
@@ -74,14 +74,14 @@ a:focus-visible {
 }
 
 .brand strong {
-  font-family: "Manrope", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   letter-spacing: -0.4px;
 }
 
 .brand small {
   margin-top: 3px;
-  color: #aab4cb;
+  color: var(--color-text-secondary);
   font-size: 12px;
 }
 
@@ -111,7 +111,7 @@ a:focus-visible {
   padding: 13px 14px;
   border: 0;
   border-radius: 10px;
-  color: #bdc7da;
+  color: var(--color-text-secondary);
   background: transparent;
   text-align: left;
   font-size: 13px;
@@ -122,11 +122,11 @@ a:focus-visible {
 
 .nav-link:hover {
   background: var(--color-sidebar-hover);
-  color: white;
+  color: var(--color-text);
 }
 
 .nav-link.active {
-  color: white;
+  color: var(--color-text);
   background: var(--color-primary);
   font-weight: 600;
 }
@@ -143,9 +143,9 @@ a:focus-visible {
 
 .sidebar-note {
   padding: 17px;
-  border: 1px solid #34425c;
+  border: 1px solid var(--color-border);
   border-radius: 13px;
-  background: #202e49;
+  background: var(--color-sidebar-card);
 }
 
 .note-icon {
@@ -155,8 +155,8 @@ a:focus-visible {
   height: 30px;
   margin-bottom: 12px;
   border-radius: 9px;
-  background: #3d3b70;
-  color: #d0c9ff;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
 }
 
 .sidebar-note strong {
@@ -167,7 +167,7 @@ a:focus-visible {
 
 .sidebar-note p {
   margin: 6px 0 0;
-  color: #aab5ca;
+  color:var(--color-text-secondary);
   font-size: 11px;
   line-height: 1.7;
 }
@@ -368,7 +368,7 @@ a:focus-visible {
 
 .stat-card strong {
   display: block;
-  font-family: "Manrope", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 28px;
   font-weight: 800;
   letter-spacing: -1px;
@@ -399,7 +399,7 @@ a:focus-visible {
 
 .section-heading h2 {
   margin: 0;
-  font-family: "Manrope", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 19px;
   letter-spacing: -0.6px;
 }
@@ -558,7 +558,7 @@ a:focus-visible {
 .resource-details h3 {
   min-height: 40px;
   margin: 8px 0 5px;
-  font-family: "Manrope", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
   line-height: 1.65;
 }
@@ -761,9 +761,6 @@ a:focus-visible {
 }
 
 @media (max-width: 760px) {
-  .sidebar {
-    display: none;
-  }
   .main-content {
     margin-left: 0;
   }

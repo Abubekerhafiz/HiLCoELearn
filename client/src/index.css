@@ -8,24 +8,23 @@
 }
 
 :root {
-  /* Brand colors */
-  --color-primary: #6555d9;
-  --color-primary-hover: #5544c5;
-  --color-primary-light: #f0eeff;
-  --color-sidebar: #18253f;
-  --color-sidebar-hover: #263450;
-  --color-background: #f7f8fc;
-  --color-surface: #ffffff;
-  --color-text: #20283a;
-  --color-text-secondary: #7c8497;
-  --color-text-muted: #969caf;
-  --color-border: #e9ebf2;
-  --color-success: #169c70;
-  --color-warning: #d88932;
+  /* Default theme colors */
+--color-primary: #987323;
+--color-primary-hover: #765817;
+--color-primary-light: #f5eedf;
+--color-sidebar: #ffffff;
+--color-sidebar-hover: #f3eee3;
+--color-background: #faf9f6;
+--color-surface: #ffffff;
+--color-text: #29251d;
+--color-text-secondary: #746c5e;
+--color-text-muted: #999080;
+--color-border: #e9e3d7;
+--color-success: #169c70;
+--color-warning: #d88932;
+--color-sidebar-card: #f5f0e5;
 
   /* Typography */
-  --font-body: "Inter", sans-serif;
-  --font-heading: "Caveat", cursive;
   --font-size-xs: 10px;
   --font-size-sm: 12px;
   --font-size-md: 14px;
