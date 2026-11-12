@@ -7,6 +7,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import "./App.css";
+import Auth from "./Auth";
 
 const resources = [
   {
@@ -58,6 +59,9 @@ const initialTasks = [
 ];
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authError, setAuthError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); 
   const [activePage, setActivePage] = useState("Dashboard");
   const [sidebarOpen, setSidebarOpen] = useState( () => window.innerWidth >= 768);
   const [search, setSearch] = useState("");
@@ -115,7 +119,91 @@ function App() {
   }
 
   const completedTasks = tasks.filter((task) => task.done).length;
+  if (!isAuthenticated) {
+  return (
+  <Auth
+    onSubmit={handleAuthSubmit}
+    error={authError}
+    loading={isLoading}
+  />
+);
+}
+async function handleAuthSubmit(formData) {
+  setAuthError("");
+  setIsLoading(true);
 
+  try {
+    const endpoint = formData.isSignUp ? "register" : "login";
+
+    // Send registration or login request
+    const response = await fetch(
+      `http://localhost:5000/api/users/${endpoint}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+          formData.isSignUp
+            ? {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+              }
+            : {
+                email: formData.email,
+                password: formData.password,
+              }
+        ),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Authentication failed");
+    }
+
+    let loginData = data;
+
+    // Registration does not return a token,
+    // so sign in automatically after registration.
+    if (formData.isSignUp) {
+      const loginResponse = await fetch(
+        "http://localhost:5000/api/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
+
+      loginData = await loginResponse.json();
+
+      if (!loginResponse.ok) {
+        throw new Error(
+          loginData.message || "Account created, but login failed."
+        );
+      }
+    }
+
+    // Save the token
+    localStorage.setItem("hilcoelearn-token", loginData.token);
+
+    // Show dashboard
+    setIsAuthenticated(true);
+
+  } catch (error) {
+    setAuthError(error.message);
+  } finally {
+    setIsLoading(false);
+  }
+}
   return (
     <div className="app-shell" data-theme={theme}>
 <aside
