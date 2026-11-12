@@ -1,5 +1,5 @@
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   Home01Icon,
   BookOpen01Icon,
@@ -64,7 +64,13 @@ function App() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [tasks, setTasks] = useState(initialTasks);
   const [newTask, setNewTask] = useState("");
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => {
+  const savedTheme = localStorage.getItem("hilcoelearn-theme");
+ return savedTheme || "light";
+  });
+  useEffect(() => {
+  localStorage.setItem("hilcoelearn-theme", theme);
+}, [theme]);
 
   const filteredResources = useMemo(() => {
     const query = search.toLowerCase().trim();
