@@ -60,6 +60,8 @@ const initialTasks = [
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [user, setUser] = useState(null);
   const [authError, setAuthError] = useState("");
   const [isLoading, setIsLoading] = useState(false); 
   const [activePage, setActivePage] = useState("Dashboard");
@@ -72,9 +74,52 @@ function App() {
   const savedTheme = localStorage.getItem("hilcoelearn-theme");
  return savedTheme || "light";
   });
-  useEffect(() => {
+
+useEffect(() => {
   localStorage.setItem("hilcoelearn-theme", theme);
 }, [theme]);
+
+useEffect(() => {
+  async function checkAuth() {
+    console.log("Checking authentication...");
+    const token = localStorage.getItem("hilcoelearn-token");
+
+    if (!token) {
+      setIsCheckingAuth(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/users/profile",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Session expired");
+      }
+
+      const data = await response.json();
+
+      setUser(data.user);
+      setIsAuthenticated(true);
+
+    } catch (error) {
+      localStorage.removeItem("hilcoelearn-token");
+      setUser(null);
+      setIsAuthenticated(false);
+
+    } finally {
+      setIsCheckingAuth(false);
+    }
+  }
+
+  checkAuth();
+}, []);
 
   const filteredResources = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -119,14 +164,22 @@ function App() {
   }
 
   const completedTasks = tasks.filter((task) => task.done).length;
-  if (!isAuthenticated) {
+  if (isCheckingAuth) {
   return (
-  <Auth
-    onSubmit={handleAuthSubmit}
-    error={authError}
-    loading={isLoading}
-  />
-);
+    <div className="flex min-h-screen items-center justify-center">
+      <p>Checking your session...</p>
+    </div>
+  );
+}
+
+if (!isAuthenticated) {
+  return (
+    <Auth
+      onSubmit={handleAuthSubmit}
+      error={authError}
+      loading={isLoading}
+    />
+  );
 }
 async function handleAuthSubmit(formData) {
   setAuthError("");
@@ -194,6 +247,8 @@ async function handleAuthSubmit(formData) {
 
     // Save the token
     localStorage.setItem("hilcoelearn-token", loginData.token);
+    // Save the user's information
+    setUser(loginData.user);
 
     // Show dashboard
     setIsAuthenticated(true);
@@ -203,6 +258,12 @@ async function handleAuthSubmit(formData) {
   } finally {
     setIsLoading(false);
   }
+}
+function handleLogout() {
+  localStorage.removeItem("hilcoelearn-token");
+  setUser(null);
+  setIsAuthenticated(false);
+  setAuthError("");
 }
   return (
     <div className="app-shell" data-theme={theme}>
@@ -287,15 +348,24 @@ async function handleAuthSubmit(formData) {
 
    <div className="mt-[22px] flex items-center gap-[11px] border-t border-[var(--color-border)] px-[2px] pt-4">
   <div className="grid size-[37px] shrink-0 place-items-center rounded-full bg-[var(--color-primary-light)] font-bold text-[var(--color-primary)]">
-    S
+   {user?.name?.charAt(0).toUpperCase() || "S"}
   </div>
   <div>
-    <strong className="block text-xs">Student</strong>
+    <strong className="block text-xs">
+  {user?.name || "Student"}
+</strong>
     <small className="mt-1 block text-[10px] text-[var(--color-text-secondary)]">
       HilcoeLearn member
     </small>
    </div>
    </div>
+   <button
+  onClick={handleLogout}
+  className="mt-3 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-[var(--color-text-secondary)] transition-all duration-200 hover:bg-red-500/10 hover:text-red-500"
+>
+  <span className="text-base">↪</span>
+  <span>Sign out</span>
+</button>
   </div>
 </aside>
  {sidebarOpen && (
